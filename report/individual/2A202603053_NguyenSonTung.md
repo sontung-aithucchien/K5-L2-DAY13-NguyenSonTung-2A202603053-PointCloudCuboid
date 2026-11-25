@@ -1,11 +1,11 @@
 # Báo cáo Day 13 — Nguyễn Sơn Tùng, 2A202603053
 
 ## 1. Kết luận trước
-Mã số sinh viên là 2A202603053 và task CVAT là `D13-2A202603053`. Task có 10 frame: `s01f00`, `s01f33`, `s02f03`, `s02f51`, `s03f01`, `s03f34`, `s04f16`, `s04f40`, `s05f30`, `s05f45`. Môi trường làm bài là Windows; tài khoản CVAT là `sontung1807`, chưa ghi phiên bản About trong báo cáo này.
+Mã số sinh viên là 2A202603053 và task CVAT là `D13-2A202603053`. Task có 10 frame: `s01f00`, `s01f33`, `s02f03`, `s02f51`, `s03f01`, `s03f34`, `s04f16`, `s04f40`, `s05f30`, `s05f45`. Môi trường làm bài là Windows; tài khoản CVAT là `sontung1807`, phiên bản CVAT là 2.74.1.
 
-Sau lần đồng bộ cuối, bảng A có 74 cuboid. Frame có ít nhất cuboid là `s01f33` và `s03f34`, mỗi frame lần lượt có 3 và 4 cuboid. Phiếu tự kiểm có 8/74 cuboid có cảnh báo. Phần tôi tự tin nhất là hướng xe cùng chiều gần 270°, phần còn yếu cần kiểm lại là đáy và kích thước ở các cuboid có cảnh báo.
+Sau lần đồng bộ cuối, bảng A có 74 cuboid. Frame có ít nhất cuboid là `s01f33` và `s03f34`, mỗi frame lần lượt có 3 và 4 cuboid. Phiếu tự kiểm có 8/74 cuboid có cảnh báo. Hướng xe cùng chiều gần 270° được xác định khá chắc chắn; đáy và kích thước ở các cuboid có cảnh báo cần được kiểm tra thêm.
 
-Trong CVAT tôi đổi Top/Side/Front để căn tâm, kích thước và chiều cao; ở Top dùng Cuboid orientation để căn mũi tên, sau đó kiểm đáy ở Side/Front và xem cuboid trên các ảnh camera bằng `preview`. Mỗi lần sửa phải bật Appearance → Cuboid orientation và kiểm lại phần đầu, đuôi xe cũng như mặt đường.
+Trong CVAT, các chế độ Top/Side/Front được dùng để căn tâm, kích thước và chiều cao; ở Top dùng Cuboid orientation để căn mũi tên, sau đó kiểm đáy ở Side/Front và xem cuboid trên các ảnh camera bằng `preview`. Mỗi lần sửa cần bật Appearance → Cuboid orientation và kiểm lại phần đầu, đuôi xe cũng như mặt đường.
 
 ## 2. Đọc frame (Bước 2)
 Hai frame đọc kỹ là hai frame đầu: `s01f00` và `s01f33`. Hình ảnh cần lưu trong tên `t1-s01f00-3d.png`, `t1-s01f00-top.png`, `t1-s01f33-3d.png`, `t1-s01f33-top.png`.
@@ -31,7 +31,7 @@ Tám frame lướt:
 | s05f30 | −y ở phía trước | Có cảnh báo mép ở Car idx 1. |
 | s05f45 | −y ở phía trước | Có Truck xa và hai Cyclist. |
 
-Bốn frame còn lại trong danh sách gồm chính hai frame đọc kỹ và một phần của tám frame lướt; không thêm frame ngoài task của tôi.
+Bốn frame còn lại trong danh sách gồm chính hai frame đọc kỹ và một phần của tám frame lướt; không thêm frame ngoài task.
 
 ## 3. Ba cuboid có hướng dẫn (Bước 3)
 Ảnh: `t2-a-car.png`, `t2-b-bus-truck.png`, `t2-c-ped-cyclist.png`.
@@ -54,7 +54,7 @@ Nguyên nhân dưới đây là giả thuyết.
 | 3. Phản xạ thấp / ít điểm bất thường | s05f30 idx 1 hoặc s05f45 idx 6 / `t4-3-phan-xa-thap.png` / task cá nhân | Bề mặt tối, kính hoặc góc quan sát có thể phản xạ ít điểm; chưa khẳng định do thiếu thông tin cảm biến. | Cụm có số điểm lệch so với vật cùng khoảng cách hoặc có số điểm sát mép hộp. | Ghi giả thuyết và không nới rộng hộp theo quầng điểm; vẫn căn kích thước theo point cloud và ảnh camera. |
 | 4. Điểm lạ | s02f03 / `t4-4-diem-la.png` / task cá nhân | Điểm lẻ có thể do nhiễu, phản xạ hoặc cụm bụi; nguồn cụ thể chưa xác định. | Cụm điểm không tạo hình dạng hoặc nằm ngoài vùng vật quan sát được. | Không gán điểm lạ thành vật; nếu không chắc class hoặc scope thì ghi UNCERTAIN_CLASS/UNCERTAIN_SCOPE thay vì đoán. |
 
-## 5. Số từ cuboid của tôi (Bước 5)
+## 5. Số liệu cuboid (Bước 5)
 Dữ liệu lấy trực tiếp từ `submission/D13-2A202603053-bangA.csv`; số điểm lấy từ `submission/D13-2A202603053-tukiem.csv`. Mặt đường tham chiếu khoảng −1,7 m.
 
 | Cuboid (frame, idx, class) | z | h | z đáy = z − h/2 | dist_m | r = √(x²+y²+z²) | yaw_deg | Nhận xét |
