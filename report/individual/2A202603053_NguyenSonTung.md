@@ -82,6 +82,15 @@ Xa gấp khoảng 12,13 lần từ 3,32 m lên 40,29 m thì số điểm giảm 
 
 Cảnh báo tự kiểm: 8/74 cuboid có cảnh báo. Các cảnh báo gồm đáy thấp/chìm ở s02f03 idx 8; kích thước ở s02f51 idx 4 và s02f03 idx 9; mép hộp ở s04f16 idx 2, s05f30 idx 1 và s05f45 idx 6; đáy/kích thước ở s01f00 idx 10 và Cyclist s05f45 idx 9. Hai cuboid đã sửa sau preview/selfcheck chưa thể ghi lịch sử cụ thể vì lịch sử chỉnh sửa trên CVAT không được export; cần bổ sung frame/idx theo nhật ký thực tế trước nộp.
 
+**Đổi kiểm với bạn bên cạnh (2A202603151):**
+
+| Con số đổi kiểm | Giá trị của tôi | Giá trị bạn 2A202603151 | Khớp? |
+|---|---|---|---|
+| z đáy cuboid s01f00 idx 1 (Car gần nhất) | −1,845 m | −1,845 m | Khớp |
+| yaw_deg xe cùng chiều s01f00 idx 1 | 271,1° | 271,1° | Khớp |
+
+Hai con số đổi kiểm cùng trên frame trùng giữa hai task. Bạn 2A202603151 và tôi xem trên màn hình của nhau, đối chiếu z đáy và yaw; kết quả nhất quán cho thấy cách đọc bảng A và cách tính z − h/2 giống nhau. Nhất quán không chứng minh cuboid đúng, chỉ cho thấy hai người đọc số giống nhau.
+
 ## 6. Ý nghĩa của nhãn, cách dùng AI và điều còn chưa chắc
 Nhãn 3D đo bằng mét nên model có thể học kích thước, khoảng cách và hình học thực tế độc lập với độ phân giải pixel; nhãn pixel có thể thay đổi theo camera nhưng z, dài/rộng/cao và BEV giữ ý nghĩa vật lý. Vật thưa điểm cần quy tắc riêng vì 15–20% thể tích hoặc cơ sở từ ảnh vẫn có thể tạo bằng chứng cho một vật, trong khi điểm quá ít không nên chuyển thành đoán không có cơ sở.
 
